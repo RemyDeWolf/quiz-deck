@@ -16,16 +16,21 @@
     },
     {
       "step": 3,
+      "type": "camera",
+      "question": "Take a picture of something gold (like treasure!)"
+    },
+    {
+      "step": 4,
       "question": "What do pirates say when they find treasure?",
       "answer": "ahoy"
     },
     {
-      "step": 4,
+      "step": 5,
       "question": "What bird sits on a pirate's shoulder?",
       "answer": "parrot"
     },
     {
-      "step": 5,
+      "step": 6,
       "question": "What do pirates bury and mark with an X?",
       "answer": "treasure"
     }

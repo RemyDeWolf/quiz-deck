@@ -5,11 +5,12 @@ This document provides context for AI assistants working on the QuizDeck project
 ## Project Overview
 
 **QuizDeck** is a web-based quiz application that supports:
-- Text input and multiple choice questions
+- Text input, multiple choice, and camera questions
 - Custom deck uploads (JSON format)
 - Random question ordering with limits
 - Two quiz modes: Strict (must answer correctly) and Practice (scoring)
 - Optional images and sound effects
+- Self-validated camera capture with secret split button
 
 ## Architecture Decisions
 
@@ -33,18 +34,23 @@ questionContainer.classList.add('hidden');
 - Used in: `displayCurrentQuestion()`, `checkAnswer()`, `showCompletion()`
 
 ### Question Type Detection
-**Pattern:** Check for `choices` array to determine question type.
+**Pattern:** Check for `type` field and `choices` array to determine question type.
 
 ```javascript
-if (currentQuestion.choices && currentQuestion.choices.length > 0) {
+if (currentQuestion.type === 'camera') {
+    // Camera mode
+    cameraContainer.style.display = 'block';
+} else if (currentQuestion.choices && currentQuestion.choices.length > 0) {
     // Multiple choice mode
+    multipleChoiceContainer.style.display = 'block';
 } else {
     // Text input mode
+    questionContainer.style.display = 'flex';
 }
 ```
 
-This single check determines:
-- Which UI elements to display
+This check determines:
+- Which UI elements to display (text input, multiple choice, or camera)
 - How to handle answer submission
 - What visual feedback to show
 
@@ -68,6 +74,49 @@ loadAvailableDecks() → fetch('decks/index.json')
   → for each deck file, fetch metadata
   → dynamically create buttons
 ```
+
+### Camera Question Self-Validation
+**Decision:** Implement a secret split button for self-validated photo capture.
+
+**Use Case:** Scavenger hunts and real-world tasks where users need to take photos and validate themselves without external verification.
+
+**Implementation:**
+```javascript
+// Split button validation on click
+validatePhotoBtn.addEventListener('click', (e) => {
+    const rect = validatePhotoBtn.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const clickPosition = (clickX / rect.width);
+
+    if (clickPosition > 0.5) {
+        // Right half = correct
+        handleCorrectPhoto();
+    } else {
+        // Left half = incorrect
+        handleIncorrectPhoto();
+    }
+});
+```
+
+**Workflow:**
+1. User captures photo with device camera
+2. Photo displays with "Continue" button
+3. User clicks button:
+   - **Right half (>50%):** Green border, success sound, button → "Next Question"
+   - **Left half (≤50%):** Red border, red ✗ overlay, button → "Try Again"
+4. "Try Again" resets camera (hides photo, shows camera input again)
+5. "Next Question" proceeds to next question
+
+**Key Features:**
+- Button looks completely normal - observer wouldn't notice split
+- Only person clicking knows which side validates as correct
+- Works in both Strict Mode (must retry until right side clicked) and Practice Mode (scoring tracked)
+- Photo feedback: green border for correct, red border + large ✗ overlay for incorrect
+
+**State Management:**
+- Button uses `data-state` attribute: `null` (initial), `'correct'`, or `'incorrect'`
+- Button text changes: "Continue" → "Next Question" or "Try Again"
+- Button behavior changes based on state (navigation vs validation)
 
 ## Bug Patterns & Solutions
 
@@ -135,6 +184,11 @@ function moveToNextQuestion() {
       "answer": "correct answer",     // string or array
       "choices": ["A", "B", "C", "D"], // optional for multiple choice
       "image": "path/to/image.png"     // optional
+    },
+    {
+      "step": 2,
+      "type": "camera",               // camera question type
+      "question": "Take a picture of something gold!"
     }
   ]
 }
@@ -146,7 +200,8 @@ function moveToNextQuestion() {
 - `requireCorrectAnswers: true` = Strict Mode (must answer correctly)
 - `answer` can be string or array for multiple correct answers
 - `choices` presence determines text input vs multiple choice
-- `image` is optional; if missing or fails to load, auto-proceeds
+- `type: "camera"` creates photo capture question with self-validation
+- `image` is optional; if missing or fails to load, auto-proceeds (text/multiple choice only)
 
 ### Deck Manifest Format (decks/index.json)
 
@@ -181,6 +236,9 @@ function isAnswerCorrect(userAnswer, correctAnswer) {
 When making changes, test:
 - [ ] Text input questions (with and without images)
 - [ ] Multiple choice questions
+- [ ] Camera questions (left half = incorrect, right half = correct)
+- [ ] Camera "Try Again" flow (photo hides, returns to camera input)
+- [ ] Camera "Next Question" flow (proceeds to next)
 - [ ] Strict mode (requireCorrectAnswers: true)
 - [ ] Practice mode (requireCorrectAnswers: false)
 - [ ] Random + maxQuestions combination
@@ -192,6 +250,7 @@ When making changes, test:
 - **Wrong answer with visual feedback:** 2.5 seconds (multiple choice)
 - **Correct answer auto-proceed:** 1 second (no image)
 - **Image display:** User-controlled (press Enter or click button)
+- **Camera questions:** User-controlled (click button to validate, then "Next Question" or "Try Again")
 
 ### Sound Effects
 - **Correct:** C-E-G ascending major chord (0.5s)
@@ -282,5 +341,5 @@ This project was built with Claude (Anthropic). For questions about architectura
 
 ---
 
-*Last updated: January 2, 2026*
-*Session: Initial development with Claude Sonnet 4.5*
+*Last updated: January 3, 2026*
+*Session: Added camera question feature with self-validation split button*

@@ -2,7 +2,7 @@
 
 A simple web app for interactive quizzes where users answer questions step by step and can optionally see pictures when they get correct answers.
 
-Upload your own question decks or use built-in quizzes with support for text input, multiple choice, images, and scoring.
+Upload your own question decks or use built-in quizzes with support for text input, multiple choice, camera capture, images, and scoring.
 
 **Live at https://remydewolf.github.io/quiz-deck/**
 
@@ -12,9 +12,10 @@ Upload your own question decks or use built-in quizzes with support for text inp
 - **Multiple Question Decks**: Choose from different quiz decks
 - Dynamic quiz title display
 - Dark background with large white text for easy reading
-- **Two Question Types**:
+- **Three Question Types**:
   - **Text Input**: Type your answer
   - **Multiple Choice**: Click to select from 4 options
+  - **Camera**: Take a photo and self-validate with secret split button
 - **Sound Effects**: Pleasant sounds for correct and wrong answers
 - Optional images that display after correct answers (automatically skips if image doesn't exist)
 - **Two Quiz Modes**:
@@ -113,6 +114,11 @@ Each question deck file should follow this format:
       "step": 3,
       "question": "Text input with multiple correct answers?",
       "answer": ["answer1", "answer2"]
+    },
+    {
+      "step": 4,
+      "type": "camera",
+      "question": "Take a picture of something gold!"
     }
   ]
 }
@@ -132,11 +138,12 @@ Each question deck file should follow this format:
 **Question Properties:**
 - **step**: The question number (1, 2, 3, etc.) - keep them in sequence
 - **question**: The question to display to the user
-- **answer**: The correct answer (case-insensitive). Can be:
+- **type**: (Optional) Question type. Set to `"camera"` for photo capture questions. Omit for text input questions
+- **answer**: The correct answer (case-insensitive). Required for text input and multiple choice questions. Not used for camera questions. Can be:
   - A single string: `"sacramento"`
   - An array of strings for multiple correct answers (text input only): `["egg", "eggs"]`
 - **choices**: (Optional) Array of 4 strings for multiple choice questions. If present, displays buttons instead of text input
-- **image**: (Optional) The image file path to display when answered correctly (relative to project root). Omit this field if you don't want to show an image
+- **image**: (Optional) The image file path to display when answered correctly (relative to project root). Omit this field if you don't want to show an image. Not used for camera questions
 
 ### Adding Images
 
@@ -163,7 +170,7 @@ quiz-deck/
 
 ## Included Question Decks
 
-- **Pirate Treasure Hunt** (5 questions, strict mode): A pirate-themed adventure with text input
+- **Pirate Treasure Hunt** (6 questions, strict mode): A pirate-themed adventure with text input and camera question
 - **Easter Egg Hunt** (5 questions, strict mode): An Easter-themed quiz with multiple answer support (text input)
 - **US State Capitals** (50 questions, random, max 10, practice mode): Multiple choice quiz with all 50 US state capitals. Questions are randomized and limited to 10 per session with scoring
 
@@ -191,3 +198,15 @@ quiz-deck/
 - Great for large question banks (like the 50 state capitals)
 - Each quiz session presents different questions
 - Ideal for repeated practice without memorizing question order
+
+### Camera Questions (Self-Validated Photo Capture)
+- Perfect for scavenger hunts and real-world tasks where users validate themselves
+- User takes a photo using device camera
+- Photo displays with a "Continue" button
+- **Secret split button validation** - only the person clicking knows:
+  - Click **right half** of button → Correct (green border, success sound, "Next Question" button appears)
+  - Click **left half** of button → Incorrect (red border, large red ✗ overlay, "Try Again" button appears)
+- On "Try Again", photo is hidden and user returns to camera input
+- On "Next Question", quiz proceeds to next question
+- Observer watching wouldn't notice the split - button looks completely normal
+- Works in both Strict Mode (must get correct) and Practice Mode (scoring)

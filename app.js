@@ -30,6 +30,12 @@ const nextBtn = document.getElementById('next-btn');
 const questionContainer = document.getElementById('question-container');
 const multipleChoiceContainer = document.getElementById('multiple-choice-container');
 const choicesContainer = document.getElementById('choices');
+const cameraContainer = document.getElementById('camera-container');
+const cameraInput = document.getElementById('camera-input');
+const photoPreview = document.getElementById('photo-preview');
+const capturedPhoto = document.getElementById('captured-photo');
+const photoOverlay = document.getElementById('photo-overlay');
+const validatePhotoBtn = document.getElementById('validate-photo-btn');
 const progressBar = document.getElementById('progress-bar');
 const scoreCard = document.getElementById('score-card');
 const scoreText = document.getElementById('score-text');
@@ -196,15 +202,32 @@ function displayCurrentQuestion() {
     stepNumber.textContent = `Question ${currentQuestionIndex + 1}`;
     questionText.textContent = currentQuestion.question;
 
-    // Check if this is a multiple choice question
-    if (currentQuestion.choices && currentQuestion.choices.length > 0) {
-        // Show multiple choice - hide text input
+    // Check question type
+    if (currentQuestion.type === 'camera') {
+        // Show camera input - hide other inputs
+        questionContainer.style.display = 'none';
+        multipleChoiceContainer.style.display = 'none';
+        cameraContainer.style.display = 'block';
+        // Reset camera state
+        cameraInput.style.display = 'block';
+        photoPreview.classList.add('hidden');
+        capturedPhoto.src = '';
+        capturedPhoto.className = '';
+        photoOverlay.classList.add('hidden');
+        // Reset button state
+        validatePhotoBtn.textContent = 'Continue';
+        validatePhotoBtn.removeAttribute('data-state');
+        validatePhotoBtn.style.display = 'block';
+    } else if (currentQuestion.choices && currentQuestion.choices.length > 0) {
+        // Show multiple choice - hide text input and camera
         questionContainer.style.display = 'none';
         multipleChoiceContainer.style.display = 'block';
+        cameraContainer.style.display = 'none';
         displayMultipleChoice(currentQuestion.choices);
     } else {
-        // Show text input - hide multiple choice
+        // Show text input - hide multiple choice and camera
         multipleChoiceContainer.style.display = 'none';
+        cameraContainer.style.display = 'none';
         questionContainer.style.display = 'flex';
         answerInput.value = '';
         answerInput.focus();
@@ -252,7 +275,7 @@ function showCompletion() {
         scoreText.innerHTML = `You answered <strong>${score} out of ${totalQuestions}</strong> questions correctly!<br>Score: <strong>${percentage}%</strong>`;
     } else {
         // Show celebration message
-        messageDisplay.innerHTML = '🎉 CONGRATULATIONS! 🎉<br>You completed the quiz!<br>Amazing job! 🏆';
+        messageDisplay.innerHTML = `🎉 CONGRATULATIONS! 🎉<br>You completed ${quizName}!<br>Amazing job! 🏆`;
         messageDisplay.classList.remove('hidden', 'error', 'success');
         messageDisplay.classList.add('final-success');
     }
@@ -415,6 +438,8 @@ function moveToNextQuestion() {
     currentQuestionIndex++;
     imageContainer.classList.add('hidden');
     messageDisplay.classList.add('hidden');
+    cameraContainer.style.display = 'none';
+    validatePhotoBtn.style.display = 'block';
     // Let displayCurrentQuestion() handle showing the right container type
     displayCurrentQuestion();
     updateProgressBar();
@@ -522,6 +547,91 @@ function loadQuizDataFromObject(data) {
 
     displayCurrentQuestion();
     updateProgressBar();
+}
+
+// Handle camera input
+cameraInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+        capturedPhoto.src = event.target.result;
+        photoPreview.classList.remove('hidden');
+        cameraInput.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+});
+
+// Handle photo validation with split button
+validatePhotoBtn.addEventListener('click', (e) => {
+    const validationState = validatePhotoBtn.getAttribute('data-state');
+
+    if (validationState === 'correct') {
+        // Post-validation: proceed to next question
+        moveToNextQuestion();
+        return;
+    } else if (validationState === 'incorrect') {
+        // Post-validation: retry photo capture
+        retryPhotoCapture();
+        return;
+    }
+
+    // Initial validation with split button
+    const rect = validatePhotoBtn.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const buttonWidth = rect.width;
+    const clickPosition = clickX / buttonWidth;
+
+    if (clickPosition > 0.5) {
+        // Right half - correct answer
+        handleCorrectPhoto();
+    } else {
+        // Left half - incorrect answer
+        handleIncorrectPhoto();
+    }
+});
+
+// Handle correct photo validation
+function handleCorrectPhoto() {
+    playCorrectSound();
+    score++;
+
+    // Apply success styling
+    capturedPhoto.classList.add('correct');
+
+    // Change button to "Next Question" mode
+    validatePhotoBtn.textContent = 'Next Question';
+    validatePhotoBtn.setAttribute('data-state', 'correct');
+}
+
+// Handle incorrect photo validation
+function handleIncorrectPhoto() {
+    playWrongSound();
+
+    // Apply error styling
+    capturedPhoto.classList.add('incorrect');
+    photoOverlay.innerHTML = '✗<br><span style="font-size: 1.5rem;">Incorrect, try again</span>';
+    photoOverlay.classList.remove('hidden');
+
+    // Change button to "Try Again" mode
+    validatePhotoBtn.textContent = 'Try Again';
+    validatePhotoBtn.setAttribute('data-state', 'incorrect');
+}
+
+// Retry photo capture (reset camera state)
+function retryPhotoCapture() {
+    // Reset photo state
+    capturedPhoto.className = '';
+    capturedPhoto.src = '';
+    photoOverlay.classList.add('hidden');
+    photoPreview.classList.add('hidden');
+    cameraInput.style.display = 'block';
+    cameraInput.value = '';
+
+    // Reset button to validation mode
+    validatePhotoBtn.textContent = 'Continue';
+    validatePhotoBtn.removeAttribute('data-state');
 }
 
 // Event listeners

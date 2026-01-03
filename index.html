@@ -48,6 +48,15 @@
                 <div id="choices"></div>
             </div>
 
+            <div id="camera-container" class="hidden">
+                <input type="file" id="camera-input" accept="image/*" capture="environment" />
+                <div id="photo-preview" class="hidden">
+                    <img id="captured-photo" src="" alt="Your Photo">
+                    <div id="photo-overlay" class="hidden"></div>
+                    <button id="validate-photo-btn">Continue</button>
+                </div>
+            </div>
+
             <div id="message-display" class="hidden"></div>
 
             <div id="image-container" class="hidden">
