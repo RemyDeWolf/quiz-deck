@@ -2,6 +2,7 @@
   "decks": [
     "pirate-treasure.json",
     "egg-hunt.json",
-    "us-capitals.json"
+    "us-capitals.json",
+    "birthday-hunt.json"
   ]
 }
