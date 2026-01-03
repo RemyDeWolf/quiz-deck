@@ -4,7 +4,7 @@ A simple web app for interactive quizzes where users answer questions step by st
 
 Upload your own question decks or use built-in quizzes with support for text input, multiple choice, images, and scoring.
 
-**GitHub Repository:** `quiz-deck`
+**Live at https://remydewolf.github.io/quiz-deck/**
 
 ## Features
 
