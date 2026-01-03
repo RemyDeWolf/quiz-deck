@@ -1,0 +1,308 @@
+{
+  "name": "US State Capitals",
+  "requireCorrectAnswers": false,
+  "random": true,
+  "maxQuestions": 10,
+  "steps": [
+    {
+      "step": 1,
+      "question": "What is the capital of Alabama?",
+      "answer": "Montgomery",
+      "choices": ["Birmingham", "Montgomery", "Mobile", "Huntsville"]
+    },
+    {
+      "step": 2,
+      "question": "What is the capital of Alaska?",
+      "answer": "Juneau",
+      "choices": ["Anchorage", "Fairbanks", "Juneau", "Sitka"]
+    },
+    {
+      "step": 3,
+      "question": "What is the capital of Arizona?",
+      "answer": "Phoenix",
+      "choices": ["Phoenix", "Tucson", "Mesa", "Scottsdale"]
+    },
+    {
+      "step": 4,
+      "question": "What is the capital of Arkansas?",
+      "answer": "Little Rock",
+      "choices": ["Little Rock", "Fort Smith", "Fayetteville", "Springdale"]
+    },
+    {
+      "step": 5,
+      "question": "What is the capital of California?",
+      "answer": "Sacramento",
+      "choices": ["Los Angeles", "San Francisco", "Sacramento", "San Diego"]
+    },
+    {
+      "step": 6,
+      "question": "What is the capital of Colorado?",
+      "answer": "Denver",
+      "choices": ["Denver", "Colorado Springs", "Aurora", "Boulder"]
+    },
+    {
+      "step": 7,
+      "question": "What is the capital of Connecticut?",
+      "answer": "Hartford",
+      "choices": ["Bridgeport", "New Haven", "Hartford", "Stamford"]
+    },
+    {
+      "step": 8,
+      "question": "What is the capital of Delaware?",
+      "answer": "Dover",
+      "choices": ["Wilmington", "Dover", "Newark", "Middletown"]
+    },
+    {
+      "step": 9,
+      "question": "What is the capital of Florida?",
+      "answer": "Tallahassee",
+      "choices": ["Miami", "Orlando", "Tampa", "Tallahassee"]
+    },
+    {
+      "step": 10,
+      "question": "What is the capital of Georgia?",
+      "answer": "Atlanta",
+      "choices": ["Atlanta", "Savannah", "Augusta", "Columbus"]
+    },
+    {
+      "step": 11,
+      "question": "What is the capital of Hawaii?",
+      "answer": "Honolulu",
+      "choices": ["Honolulu", "Hilo", "Kailua", "Pearl City"]
+    },
+    {
+      "step": 12,
+      "question": "What is the capital of Idaho?",
+      "answer": "Boise",
+      "choices": ["Boise", "Meridian", "Nampa", "Idaho Falls"]
+    },
+    {
+      "step": 13,
+      "question": "What is the capital of Illinois?",
+      "answer": "Springfield",
+      "choices": ["Chicago", "Springfield", "Naperville", "Peoria"]
+    },
+    {
+      "step": 14,
+      "question": "What is the capital of Indiana?",
+      "answer": "Indianapolis",
+      "choices": ["Indianapolis", "Fort Wayne", "Evansville", "South Bend"]
+    },
+    {
+      "step": 15,
+      "question": "What is the capital of Iowa?",
+      "answer": "Des Moines",
+      "choices": ["Des Moines", "Cedar Rapids", "Davenport", "Sioux City"]
+    },
+    {
+      "step": 16,
+      "question": "What is the capital of Kansas?",
+      "answer": "Topeka",
+      "choices": ["Wichita", "Overland Park", "Kansas City", "Topeka"]
+    },
+    {
+      "step": 17,
+      "question": "What is the capital of Kentucky?",
+      "answer": "Frankfort",
+      "choices": ["Louisville", "Lexington", "Frankfort", "Bowling Green"]
+    },
+    {
+      "step": 18,
+      "question": "What is the capital of Louisiana?",
+      "answer": "Baton Rouge",
+      "choices": ["New Orleans", "Baton Rouge", "Shreveport", "Lafayette"]
+    },
+    {
+      "step": 19,
+      "question": "What is the capital of Maine?",
+      "answer": "Augusta",
+      "choices": ["Portland", "Lewiston", "Bangor", "Augusta"]
+    },
+    {
+      "step": 20,
+      "question": "What is the capital of Maryland?",
+      "answer": "Annapolis",
+      "choices": ["Baltimore", "Annapolis", "Frederick", "Rockville"]
+    },
+    {
+      "step": 21,
+      "question": "What is the capital of Massachusetts?",
+      "answer": "Boston",
+      "choices": ["Boston", "Worcester", "Springfield", "Cambridge"]
+    },
+    {
+      "step": 22,
+      "question": "What is the capital of Michigan?",
+      "answer": "Lansing",
+      "choices": ["Detroit", "Grand Rapids", "Lansing", "Ann Arbor"]
+    },
+    {
+      "step": 23,
+      "question": "What is the capital of Minnesota?",
+      "answer": "Saint Paul",
+      "choices": ["Minneapolis", "Saint Paul", "Rochester", "Duluth"]
+    },
+    {
+      "step": 24,
+      "question": "What is the capital of Mississippi?",
+      "answer": "Jackson",
+      "choices": ["Jackson", "Gulfport", "Southaven", "Hattiesburg"]
+    },
+    {
+      "step": 25,
+      "question": "What is the capital of Missouri?",
+      "answer": "Jefferson City",
+      "choices": ["Kansas City", "St. Louis", "Springfield", "Jefferson City"]
+    },
+    {
+      "step": 26,
+      "question": "What is the capital of Montana?",
+      "answer": "Helena",
+      "choices": ["Billings", "Missoula", "Great Falls", "Helena"]
+    },
+    {
+      "step": 27,
+      "question": "What is the capital of Nebraska?",
+      "answer": "Lincoln",
+      "choices": ["Omaha", "Lincoln", "Bellevue", "Grand Island"]
+    },
+    {
+      "step": 28,
+      "question": "What is the capital of Nevada?",
+      "answer": "Carson City",
+      "choices": ["Las Vegas", "Reno", "Henderson", "Carson City"]
+    },
+    {
+      "step": 29,
+      "question": "What is the capital of New Hampshire?",
+      "answer": "Concord",
+      "choices": ["Manchester", "Nashua", "Concord", "Dover"]
+    },
+    {
+      "step": 30,
+      "question": "What is the capital of New Jersey?",
+      "answer": "Trenton",
+      "choices": ["Newark", "Jersey City", "Paterson", "Trenton"]
+    },
+    {
+      "step": 31,
+      "question": "What is the capital of New Mexico?",
+      "answer": "Santa Fe",
+      "choices": ["Albuquerque", "Las Cruces", "Santa Fe", "Rio Rancho"]
+    },
+    {
+      "step": 32,
+      "question": "What is the capital of New York?",
+      "answer": "Albany",
+      "choices": ["New York City", "Buffalo", "Rochester", "Albany"]
+    },
+    {
+      "step": 33,
+      "question": "What is the capital of North Carolina?",
+      "answer": "Raleigh",
+      "choices": ["Charlotte", "Raleigh", "Greensboro", "Durham"]
+    },
+    {
+      "step": 34,
+      "question": "What is the capital of North Dakota?",
+      "answer": "Bismarck",
+      "choices": ["Fargo", "Bismarck", "Grand Forks", "Minot"]
+    },
+    {
+      "step": 35,
+      "question": "What is the capital of Ohio?",
+      "answer": "Columbus",
+      "choices": ["Cleveland", "Cincinnati", "Columbus", "Toledo"]
+    },
+    {
+      "step": 36,
+      "question": "What is the capital of Oklahoma?",
+      "answer": "Oklahoma City",
+      "choices": ["Oklahoma City", "Tulsa", "Norman", "Broken Arrow"]
+    },
+    {
+      "step": 37,
+      "question": "What is the capital of Oregon?",
+      "answer": "Salem",
+      "choices": ["Portland", "Salem", "Eugene", "Gresham"]
+    },
+    {
+      "step": 38,
+      "question": "What is the capital of Pennsylvania?",
+      "answer": "Harrisburg",
+      "choices": ["Philadelphia", "Pittsburgh", "Allentown", "Harrisburg"]
+    },
+    {
+      "step": 39,
+      "question": "What is the capital of Rhode Island?",
+      "answer": "Providence",
+      "choices": ["Providence", "Warwick", "Cranston", "Pawtucket"]
+    },
+    {
+      "step": 40,
+      "question": "What is the capital of South Carolina?",
+      "answer": "Columbia",
+      "choices": ["Charleston", "Columbia", "North Charleston", "Mount Pleasant"]
+    },
+    {
+      "step": 41,
+      "question": "What is the capital of South Dakota?",
+      "answer": "Pierre",
+      "choices": ["Sioux Falls", "Rapid City", "Aberdeen", "Pierre"]
+    },
+    {
+      "step": 42,
+      "question": "What is the capital of Tennessee?",
+      "answer": "Nashville",
+      "choices": ["Memphis", "Nashville", "Knoxville", "Chattanooga"]
+    },
+    {
+      "step": 43,
+      "question": "What is the capital of Texas?",
+      "answer": "Austin",
+      "choices": ["Houston", "San Antonio", "Dallas", "Austin"]
+    },
+    {
+      "step": 44,
+      "question": "What is the capital of Utah?",
+      "answer": "Salt Lake City",
+      "choices": ["Salt Lake City", "West Valley City", "Provo", "West Jordan"]
+    },
+    {
+      "step": 45,
+      "question": "What is the capital of Vermont?",
+      "answer": "Montpelier",
+      "choices": ["Burlington", "Montpelier", "Rutland", "South Burlington"]
+    },
+    {
+      "step": 46,
+      "question": "What is the capital of Virginia?",
+      "answer": "Richmond",
+      "choices": ["Virginia Beach", "Norfolk", "Richmond", "Arlington"]
+    },
+    {
+      "step": 47,
+      "question": "What is the capital of Washington?",
+      "answer": "Olympia",
+      "choices": ["Seattle", "Spokane", "Tacoma", "Olympia"]
+    },
+    {
+      "step": 48,
+      "question": "What is the capital of West Virginia?",
+      "answer": "Charleston",
+      "choices": ["Charleston", "Huntington", "Morgantown", "Parkersburg"]
+    },
+    {
+      "step": 49,
+      "question": "What is the capital of Wisconsin?",
+      "answer": "Madison",
+      "choices": ["Milwaukee", "Madison", "Green Bay", "Kenosha"]
+    },
+    {
+      "step": 50,
+      "question": "What is the capital of Wyoming?",
+      "answer": "Cheyenne",
+      "choices": ["Cheyenne", "Casper", "Laramie", "Gillette"]
+    }
+  ]
+}

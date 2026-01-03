@@ -1,0 +1,31 @@
+{
+  "name": "Easter Egg Hunt",
+  "requireCorrectAnswers": true,
+  "steps": [
+    {
+      "step": 1,
+      "question": "What colorful item do you search for during Easter?",
+      "answer": ["egg", "eggs"]
+    },
+    {
+      "step": 2,
+      "question": "What long-eared animal brings Easter eggs?",
+      "answer": ["bunny", "rabbit"]
+    },
+    {
+      "step": 3,
+      "question": "What do you carry to collect all your eggs?",
+      "answer": "basket"
+    },
+    {
+      "step": 4,
+      "question": "What sweet treat is often hidden inside eggs?",
+      "answer": "chocolate"
+    },
+    {
+      "step": 5,
+      "question": "What season is Easter celebrated in (in the Northern Hemisphere)?",
+      "answer": "spring"
+    }
+  ]
+}

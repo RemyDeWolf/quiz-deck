@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizDeck</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 id="main-title">QuizDeck</h1>
+
+        <div id="deck-selection">
+            <h2>Select Your Question Deck</h2>
+            <div id="deck-buttons">
+                <button class="deck-btn" data-deck="decks/pirate-treasure.json">
+                    <span class="deck-icon">🏴‍☠️</span>
+                    <span class="deck-name">Pirate Treasure Hunt</span>
+                </button>
+                <button class="deck-btn" data-deck="decks/egg-hunt.json">
+                    <span class="deck-icon">🥚</span>
+                    <span class="deck-name">Easter Egg Hunt</span>
+                </button>
+                <button class="deck-btn" data-deck="decks/us-capitals.json">
+                    <span class="deck-icon">🗺️</span>
+                    <span class="deck-name">US State Capitals</span>
+                </button>
+            </div>
+
+            <div id="upload-section">
+                <h3>Or Upload Your Own Deck</h3>
+                <input type="file" id="deck-upload" accept=".json" />
+            </div>
+        </div>
+
+        <div id="deck-summary" class="hidden">
+            <h2>Deck Summary</h2>
+            <div id="summary-content"></div>
+            <button id="start-quiz-btn">Start Quiz</button>
+            <button id="back-btn">Back to Selection</button>
+        </div>
+
+        <div id="quiz-screen" class="hidden">
+            <div id="step-display">
+                <h2 id="step-number">Question 1</h2>
+                <p id="question-text"></p>
+            </div>
+
+            <div id="question-container" class="hidden">
+                <textarea
+                    id="answer-input"
+                    placeholder="Type your answer here..."
+                    rows="5"
+                ></textarea>
+                <button id="submit-btn">Submit Answer</button>
+            </div>
+
+            <div id="multiple-choice-container" class="hidden">
+                <div id="choices"></div>
+            </div>
+
+            <div id="message-display" class="hidden"></div>
+
+            <div id="image-container" class="hidden">
+                <img id="result-image" src="" alt="Quiz Image">
+                <button id="next-btn">Next Question</button>
+            </div>
+
+            <div id="score-card" class="hidden">
+                <h2>Quiz Complete!</h2>
+                <p id="score-text"></p>
+            </div>
+        </div>
+
+        <div id="progress-container">
+            <div id="progress-bar"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

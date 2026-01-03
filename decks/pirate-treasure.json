@@ -1,0 +1,32 @@
+{
+  "name": "Pirate Treasure Hunt",
+  "requireCorrectAnswers": true,
+  "steps": [
+    {
+      "step": 1,
+      "question": "What do pirates sail on across the seven seas?",
+      "answer": "ship",
+      "image": "decks/pirate-ship.png"
+    },
+    {
+      "step": 2,
+      "question": "What flies on a pirate ship to show their identity?",
+      "answer": "flag"
+    },
+    {
+      "step": 3,
+      "question": "What do pirates say when they find treasure?",
+      "answer": "ahoy"
+    },
+    {
+      "step": 4,
+      "question": "What bird sits on a pirate's shoulder?",
+      "answer": "parrot"
+    },
+    {
+      "step": 5,
+      "question": "What do pirates bury and mark with an X?",
+      "answer": "treasure"
+    }
+  ]
+}
