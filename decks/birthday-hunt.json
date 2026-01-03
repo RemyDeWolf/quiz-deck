@@ -6,68 +6,68 @@
   "steps": [
     {
       "step": 1,
-      "question": "This green thing stays up all year. It has lights and branches. We put decorations on it. What is it?",
+      "question": "🎄 This green thing stays up all year! ✨ It has lights and branches. We put decorations on it. What is it? 🌟",
       "answer": ["christmas tree", "tree"],
-      "followUp": "Look carefully inside the Christmas tree branches."
+      "followUp": "🔍 Look carefully inside the Christmas tree branches! 🎄✨"
     },
     {
       "step": 2,
       "type": "camera",
-      "question": "Find a unicorn and take a picture of it.",
-      "followUp": "Look near the giraffe stuffed toy."
+      "question": "🦄 Find a magical unicorn and take a picture of it! 📸✨",
+      "followUp": "🦒 Look near the giraffe stuffed toy! 🧸"
     },
     {
       "step": 3,
       "type": "camera",
-      "question": "Look for a blue shoe and take a picture of it.",
-      "followUp": "Look near where kid shoes go."
+      "question": "👟 Look for a blue shoe and take a picture of it! 💙📸",
+      "followUp": "👣 Look near where kid shoes go! 👟👟"
     },
     {
       "step": 4,
       "type": "camera",
-      "question": "Let’s build with paper. Make two triangles. One must be blue. One must be yellow. Take a picture of them.",
-      "followUp": "Look where the puzzles are."
+      "question": "📄✂️ Let's build with paper! Make two triangles. One must be blue 💙. One must be yellow 💛. Take a picture of them! 📸",
+      "followUp": "🧩 Look where the puzzles are! 🎯"
     },
     {
       "step": 5,
       "type": "camera",
-      "question": "Team challenge. Solve one big puzzle together and take a picture of it.",
-      "followUp": "Look under the coffee table."
+      "question": "👥🏆 Team challenge! Solve one big puzzle together and take a picture of it! 🧩📸",
+      "followUp": "☕ Look under the coffee table! 🔍"
     },
     {
       "step": 6,
       "type": "camera",
-      "question": "Do 5 jumping jacks as a team. Then smile big and take a picture.",
-      "followUp": "Look inside the white plane."
+      "question": "🤸‍♀️ Do 5 jumping jacks as a team! Then smile big 😁 and take a picture! 📸✨",
+      "followUp": "✈️ Look inside the white plane! 🔍"
     },
     {
       "step": 7,
       "type": "camera",
-      "question": "Use Lego to build the letter M. Capital M. Take a picture of it.",
-      "followUp": "Look inside the big Lego city box."
+      "question": "🧱 Use Lego to build the letter M! Capital M! 🔤 Take a picture of it! 📸",
+      "followUp": "🏙️ Look inside the big Lego city box! 🧱"
     },
     {
       "step": 8,
-      "question": "I am round. I roll. I bounce. Kids like to play with me. What am I?",
+      "question": "⚽🏀 I am round! I roll! I bounce! Kids like to play with me! What am I? 🤔",
       "answer": ["ball"],
-      "followUp": "Look inside the dog bucket."
+      "followUp": "🐶 Look inside the dog bucket! 🪣"
     },
     {
       "step": 9,
       "type": "camera",
-      "question": "Draw a happy Easter egg. It must have a face. Take a picture of your drawing.",
-      "followUp": "Look inside a stocking."
+      "question": "🎨🥚 Draw a happy Easter egg! It must have a face! 😊 Take a picture of your drawing! 📸✨",
+      "followUp": "🧦 Look inside a stocking! 🎅"
     },
     {
       "step": 10,
       "type": "camera",
-      "question": "Make an Easter egg with two different colors and take a picture of it.",
-      "followUp": "Look inside the dress drawer."
+      "question": "🎨🥚 Make an Easter egg with two different colors! 🌈 Take a picture of it! 📸✨",
+      "followUp": "👗 Look inside the dress drawer! 🔍"
     },
     {
       "step": 11,
       "type": "camera",
-      "question": "Congrats, you found everything. Now look where the vacuum hides to find your gift."
+      "question": "🎉🎊 Congrats, you found everything! 🏆✨ Now look where the vacuum hides to find your gift! 🎁🔍"
     }
   ]
 }
