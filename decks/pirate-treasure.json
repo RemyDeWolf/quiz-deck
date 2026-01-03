@@ -1,5 +1,6 @@
 {
   "name": "Pirate Treasure Hunt",
+  "icon": "🏴‍☠️",
   "requireCorrectAnswers": true,
   "steps": [
     {

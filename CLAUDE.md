@@ -48,6 +48,27 @@ This single check determines:
 - How to handle answer submission
 - What visual feedback to show
 
+### Data-Driven Deck Loading
+**Decision:** HTML has no hardcoded deck information. All decks loaded dynamically from manifest.
+
+**Structure:**
+- `decks/index.json` - Manifest listing all available deck files
+- Each deck JSON includes `icon` field for display
+- JavaScript fetches manifest → loads each deck's metadata → builds UI
+
+**Benefits:**
+- Add new decks without touching HTML
+- Deck buttons generated from actual deck data (name, icon)
+- Single source of truth for deck metadata
+- Easy to maintain and extend
+
+```javascript
+// On page load
+loadAvailableDecks() → fetch('decks/index.json')
+  → for each deck file, fetch metadata
+  → dynamically create buttons
+```
+
 ## Bug Patterns & Solutions
 
 ### 1. Message Display Persistence
@@ -103,6 +124,7 @@ function moveToNextQuestion() {
 ```json
 {
   "name": "Quiz Name",
+  "icon": "🎯",                    // emoji displayed with quiz name
   "requireCorrectAnswers": false,  // true = strict, false = practice
   "random": true,                  // shuffle questions
   "maxQuestions": 10,              // limit number of questions
@@ -119,11 +141,26 @@ function moveToNextQuestion() {
 ```
 
 **Key Conventions:**
+- `icon` field displayed next to quiz name during gameplay
 - `requireCorrectAnswers: false` = Practice Mode (show score card)
 - `requireCorrectAnswers: true` = Strict Mode (must answer correctly)
 - `answer` can be string or array for multiple correct answers
 - `choices` presence determines text input vs multiple choice
 - `image` is optional; if missing or fails to load, auto-proceeds
+
+### Deck Manifest Format (decks/index.json)
+
+```json
+{
+  "decks": [
+    "pirate-treasure.json",
+    "egg-hunt.json",
+    "us-capitals.json"
+  ]
+}
+```
+
+**Purpose:** Lists all available decks for dynamic loading. Add new deck filenames here to make them appear in the selection screen.
 
 ### Answer Validation
 **Always case-insensitive:**

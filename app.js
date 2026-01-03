@@ -2,6 +2,7 @@ let quizData = [];
 let currentQuestionIndex = 0;
 let selectedDeck = '';
 let quizName = '';
+let quizIcon = '';
 let requireCorrectAnswers = true;
 let score = 0;
 let totalQuestions = 0;
@@ -81,13 +82,57 @@ function shuffleArray(array) {
     return shuffled;
 }
 
-// Deck selection
-document.querySelectorAll('.deck-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        selectedDeck = btn.getAttribute('data-deck');
-        loadQuizData(selectedDeck);
-    });
-});
+// Load available decks dynamically
+async function loadAvailableDecks() {
+    try {
+        const response = await fetch('decks/index.json');
+        const manifest = await response.json();
+
+        const deckButtonsContainer = document.getElementById('deck-buttons');
+        deckButtonsContainer.innerHTML = ''; // Clear any existing content
+
+        // Load each deck's metadata and create button
+        for (const deckFile of manifest.decks) {
+            const deckResponse = await fetch(`decks/${deckFile}`);
+            const deckData = await deckResponse.json();
+
+            // Create deck button
+            const button = document.createElement('button');
+            button.className = 'deck-btn';
+            button.setAttribute('data-deck', `decks/${deckFile}`);
+
+            // Create icon span
+            const iconSpan = document.createElement('span');
+            iconSpan.className = 'deck-icon';
+            iconSpan.textContent = deckData.icon || '📋'; // Default icon if none specified
+
+            // Create name span
+            const nameSpan = document.createElement('span');
+            nameSpan.className = 'deck-name';
+            nameSpan.textContent = deckData.name;
+
+            // Assemble button
+            button.appendChild(iconSpan);
+            button.appendChild(nameSpan);
+
+            // Add click handler
+            button.addEventListener('click', () => {
+                selectedDeck = button.getAttribute('data-deck');
+                loadQuizData(selectedDeck);
+            });
+
+            // Add to container
+            deckButtonsContainer.appendChild(button);
+        }
+    } catch (error) {
+        console.error('Error loading decks:', error);
+        const deckButtonsContainer = document.getElementById('deck-buttons');
+        deckButtonsContainer.innerHTML = '<p style="color: #d32f2f;">Error loading question decks. Please refresh the page.</p>';
+    }
+}
+
+// Initialize: Load available decks on page load
+loadAvailableDecks();
 
 // Load quiz data from file
 async function loadQuizData(deckFile) {
@@ -96,6 +141,7 @@ async function loadQuizData(deckFile) {
         const data = await response.json();
 
         quizName = data.name;
+        quizIcon = data.icon || '📋';
         requireCorrectAnswers = data.requireCorrectAnswers !== undefined ? data.requireCorrectAnswers : true;
         maxQuestions = data.maxQuestions || null;
 
@@ -115,8 +161,8 @@ async function loadQuizData(deckFile) {
         score = 0;
         currentQuestionIndex = 0;
 
-        // Update main title with quiz name
-        mainTitle.textContent = quizName;
+        // Update main title with quiz icon and name
+        mainTitle.textContent = `${quizIcon} ${quizName}`;
 
         // Hide deck selection and show quiz screen
         deckSelection.classList.add('hidden');
@@ -448,6 +494,7 @@ backBtn.addEventListener('click', () => {
 // Load quiz data from object (used for uploaded files)
 function loadQuizDataFromObject(data) {
     quizName = data.name;
+    quizIcon = data.icon || '📋';
     requireCorrectAnswers = data.requireCorrectAnswers !== undefined ? data.requireCorrectAnswers : true;
     maxQuestions = data.maxQuestions || null;
 
@@ -467,8 +514,8 @@ function loadQuizDataFromObject(data) {
     score = 0;
     currentQuestionIndex = 0;
 
-    // Update main title with quiz name
-    mainTitle.textContent = quizName;
+    // Update main title with quiz icon and name
+    mainTitle.textContent = `${quizIcon} ${quizName}`;
 
     // Show quiz screen
     quizScreen.classList.remove('hidden');

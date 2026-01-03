@@ -1,5 +1,6 @@
 {
   "name": "Easter Egg Hunt",
+  "icon": "🥚",
   "requireCorrectAnswers": true,
   "steps": [
     {

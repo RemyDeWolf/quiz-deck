@@ -69,13 +69,21 @@ Install the "Live Server" extension and click "Go Live"
 ### Adding a New Question Deck
 
 1. Create a new JSON file in the `decks/` directory (e.g., `my-quiz.json`)
-2. Add a button for your deck in `index.html`:
-   ```html
-   <button class="deck-btn" data-deck="decks/my-quiz.json">
-       <span class="deck-icon">🎮</span>
-       <span class="deck-name">My Quiz</span>
-   </button>
+2. Make sure your JSON includes the `name` and `icon` fields
+3. Add the filename to `decks/index.json`:
+   ```json
+   {
+     "decks": [
+       "pirate-treasure.json",
+       "egg-hunt.json",
+       "us-capitals.json",
+       "my-quiz.json"
+     ]
+   }
    ```
+4. Refresh the page - your deck will automatically appear!
+
+**No HTML changes needed!** The app dynamically loads all decks from the manifest.
 
 ### JSON Format
 
@@ -84,6 +92,7 @@ Each question deck file should follow this format:
 ```json
 {
   "name": "Quiz Name",
+  "icon": "🎯",
   "requireCorrectAnswers": true,
   "random": false,
   "maxQuestions": 10,
@@ -112,7 +121,8 @@ Each question deck file should follow this format:
 ### Fields
 
 **Deck Properties:**
-- **name**: The name of your quiz (displayed at the top)
+- **name**: The name of your quiz (displayed at the top during quiz)
+- **icon**: Emoji or symbol to display next to the quiz name (e.g., "🏴‍☠️", "🥚", "🗺️"). Defaults to "📋" if not specified
 - **requireCorrectAnswers**: Boolean field that determines quiz behavior:
   - `true`: Strict mode - users must answer correctly to proceed, celebration at end
   - `false`: Practice mode - users can continue after wrong answers, score card shown at end
@@ -142,11 +152,13 @@ quiz-deck/
 ├── style.css            - Styling with dark background and white text
 ├── app.js               - JavaScript logic for quiz functionality
 ├── decks/               - Question deck data files and images
+│   ├── index.json      - Manifest listing all available decks
 │   ├── pirate-treasure.json
 │   ├── egg-hunt.json
 │   ├── us-capitals.json
 │   └── pirate-ship.png
-└── README.md
+├── README.md
+└── CLAUDE.md           - AI development context
 ```
 
 ## Included Question Decks
