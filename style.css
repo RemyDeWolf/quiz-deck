@@ -420,6 +420,35 @@ button:active {
     margin-bottom: 1rem;
 }
 
+#clue-container {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+#clue-content {
+    background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
+    border: 3px solid #ffd700;
+    border-radius: 12px;
+    padding: 40px;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+#clue-content h3 {
+    color: #ffd700;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#clue-text {
+    font-size: 1.5rem;
+    line-height: 1.8;
+    color: #e0e0e0;
+    text-align: left;
+}
+
 .hidden {
     display: none;
 }

@@ -39,6 +39,9 @@ const validatePhotoBtn = document.getElementById('validate-photo-btn');
 const progressBar = document.getElementById('progress-bar');
 const scoreCard = document.getElementById('score-card');
 const scoreText = document.getElementById('score-text');
+const clueContainer = document.getElementById('clue-container');
+const clueText = document.getElementById('clue-text');
+const clueNextBtn = document.getElementById('clue-next-btn');
 
 // Sound effects using Web Audio API
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -320,40 +323,8 @@ function checkAnswer(selectedButton = null) {
         questionContainer.style.display = 'none';
         multipleChoiceContainer.style.display = 'none';
 
-        // Check if this is text input mode (not multiple choice)
-        const isTextInput = !currentQuestion.choices || currentQuestion.choices.length === 0;
-
-        // Check if there's an image to display
-        if (currentQuestion.image) {
-            // Try to load the image first
-            const img = new Image();
-            img.onload = () => {
-                // Image loaded successfully, display it
-                resultImage.src = currentQuestion.image;
-                imageContainer.classList.remove('hidden');
-
-                // Show success message for text input mode
-                if (isTextInput) {
-                    messageDisplay.textContent = '✓ CORRECT! Well done!';
-                    messageDisplay.classList.remove('hidden', 'error', 'final-success');
-                    messageDisplay.classList.add('success');
-                }
-            };
-            img.onerror = () => {
-                // Image failed to load, proceed to next question
-                console.warn(`Image ${currentQuestion.image} failed to load, skipping...`);
-                moveToNextQuestion();
-            };
-            img.src = currentQuestion.image;
-        } else {
-            // No image, proceed to next question after a brief delay
-            // Hide any previous error messages
-            messageDisplay.classList.add('hidden');
-
-            setTimeout(() => {
-                moveToNextQuestion();
-            }, 1000);
-        }
+        // Proceed with clue/image/next question flow
+        proceedAfterCorrectAnswer();
     } else {
         // Wrong answer - play error sound
         playWrongSound();
@@ -433,12 +404,70 @@ function showMultipleChoiceFeedback(selectedButton, correctAnswer) {
     }, 2500);
 }
 
+// Show clue screen
+function showClue(clueTextContent) {
+    questionContainer.style.display = 'none';
+    multipleChoiceContainer.style.display = 'none';
+    cameraContainer.style.display = 'none';
+    messageDisplay.classList.add('hidden');
+
+    clueText.textContent = clueTextContent;
+    clueContainer.classList.remove('hidden');
+}
+
+// Proceed after correct answer (check for clue, then image, then next question)
+function proceedAfterCorrectAnswer() {
+    const currentQuestion = quizData[currentQuestionIndex];
+
+    // Check if there's a clue to display
+    if (currentQuestion.clue) {
+        showClue(currentQuestion.clue);
+        return;
+    }
+
+    // No clue, check if this is text input mode (not multiple choice)
+    const isTextInput = !currentQuestion.choices || currentQuestion.choices.length === 0;
+
+    // Check if there's an image to display
+    if (currentQuestion.image) {
+        // Try to load the image first
+        const img = new Image();
+        img.onload = () => {
+            // Image loaded successfully, display it
+            resultImage.src = currentQuestion.image;
+            imageContainer.classList.remove('hidden');
+
+            // Show success message for text input mode
+            if (isTextInput) {
+                messageDisplay.textContent = '✓ CORRECT! Well done!';
+                messageDisplay.classList.remove('hidden', 'error', 'final-success');
+                messageDisplay.classList.add('success');
+            }
+        };
+        img.onerror = () => {
+            // Image failed to load, proceed to next question
+            console.warn(`Image ${currentQuestion.image} failed to load, skipping...`);
+            moveToNextQuestion();
+        };
+        img.src = currentQuestion.image;
+    } else {
+        // No image, proceed to next question after a brief delay
+        // Hide any previous error messages
+        messageDisplay.classList.add('hidden');
+
+        setTimeout(() => {
+            moveToNextQuestion();
+        }, 1000);
+    }
+}
+
 // Move to next question
 function moveToNextQuestion() {
     currentQuestionIndex++;
     imageContainer.classList.add('hidden');
     messageDisplay.classList.add('hidden');
     cameraContainer.style.display = 'none';
+    clueContainer.classList.add('hidden');
     validatePhotoBtn.style.display = 'block';
     // Let displayCurrentQuestion() handle showing the right container type
     displayCurrentQuestion();
@@ -568,8 +597,8 @@ validatePhotoBtn.addEventListener('click', (e) => {
     const validationState = validatePhotoBtn.getAttribute('data-state');
 
     if (validationState === 'correct') {
-        // Post-validation: proceed to next question
-        moveToNextQuestion();
+        // Post-validation: check for clue, then proceed
+        proceedAfterCorrectAnswer();
         return;
     } else if (validationState === 'incorrect') {
         // Post-validation: retry photo capture
@@ -637,6 +666,7 @@ function retryPhotoCapture() {
 // Event listeners
 submitBtn.addEventListener('click', checkAnswer);
 nextBtn.addEventListener('click', moveToNextQuestion);
+clueNextBtn.addEventListener('click', moveToNextQuestion);
 
 // Allow Enter key to submit answer
 answerInput.addEventListener('keypress', (e) => {
@@ -646,9 +676,12 @@ answerInput.addEventListener('keypress', (e) => {
     }
 });
 
-// Allow Enter key to proceed when viewing image
+// Allow Enter key to proceed when viewing image or clue
 document.addEventListener('keypress', (e) => {
     if (e.key === 'Enter' && !imageContainer.classList.contains('hidden')) {
+        moveToNextQuestion();
+    }
+    if (e.key === 'Enter' && !clueContainer.classList.contains('hidden')) {
         moveToNextQuestion();
     }
 });

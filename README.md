@@ -18,6 +18,7 @@ Upload your own question decks or use built-in quizzes with support for text inp
   - **Camera**: Take a photo and self-validate with secret split button
 - **Sound Effects**: Pleasant sounds for correct and wrong answers
 - Optional images that display after correct answers (automatically skips if image doesn't exist)
+- **Clue System**: Display intermediate clues after correct answers for scavenger hunt scenarios
 - **Two Quiz Modes**:
   - **Strict Mode** (`requireCorrectAnswers: true`): Must answer correctly to proceed
   - **Practice Mode** (`requireCorrectAnswers: false`): Continue after wrong answers and see final score
@@ -113,12 +114,14 @@ Each question deck file should follow this format:
     {
       "step": 3,
       "question": "Text input with multiple correct answers?",
-      "answer": ["answer1", "answer2"]
+      "answer": ["answer1", "answer2"],
+      "clue": "Look inside the red box for the next item!"
     },
     {
       "step": 4,
       "type": "camera",
-      "question": "Take a picture of something gold!"
+      "question": "Take a picture of something gold!",
+      "clue": "Search the kitchen cabinet for your next treasure!"
     }
   ]
 }
@@ -143,7 +146,8 @@ Each question deck file should follow this format:
   - A single string: `"sacramento"`
   - An array of strings for multiple correct answers (text input only): `["egg", "eggs"]`
 - **choices**: (Optional) Array of 4 strings for multiple choice questions. If present, displays buttons instead of text input
-- **image**: (Optional) The image file path to display when answered correctly (relative to project root). Omit this field if you don't want to show an image. Not used for camera questions
+- **clue**: (Optional) String - A clue to display after answering correctly. Perfect for scavenger hunts where you want to guide users to the next location or item. The clue appears in a golden-bordered box with a "Continue" button. Works with all question types
+- **image**: (Optional) The image file path to display when answered correctly (relative to project root). Omit this field if you don't want to show an image. Not used for camera questions. Note: If both `clue` and `image` are present, only the clue will be shown
 
 ### Adding Images
 
@@ -210,3 +214,16 @@ quiz-deck/
 - On "Next Question", quiz proceeds to next question
 - Observer watching wouldn't notice the split - button looks completely normal
 - Works in both Strict Mode (must get correct) and Practice Mode (scoring)
+
+### Clue System
+- Add a `clue` field to any question to display an intermediate screen after correct answer
+- Perfect for scavenger hunts to guide participants to the next location
+- Clue displays in a golden-bordered box with prominent "CLUE" heading
+- User reads the clue and clicks "Continue" (or presses Enter) to proceed
+- Works with all question types: text input, multiple choice, and camera
+- If both `clue` and `image` are present, clue takes priority
+- Example workflow:
+  1. User answers "What is a Christmas tree?"
+  2. Correct answer triggers clue display: "Look carefully inside the Christmas tree branches to find a blue box"
+  3. User reads clue and clicks "Continue"
+  4. Quiz proceeds to next question

@@ -11,6 +11,7 @@ This document provides context for AI assistants working on the QuizDeck project
 - Two quiz modes: Strict (must answer correctly) and Practice (scoring)
 - Optional images and sound effects
 - Self-validated camera capture with secret split button
+- Clue system for scavenger hunt scenarios
 
 ## Architecture Decisions
 
@@ -118,6 +119,44 @@ validatePhotoBtn.addEventListener('click', (e) => {
 - Button text changes: "Continue" → "Next Question" or "Try Again"
 - Button behavior changes based on state (navigation vs validation)
 
+### Clue System
+**Decision:** Display intermediate clues after correct answers for scavenger hunt scenarios.
+
+**Use Case:** Guide participants to next locations in real-world treasure hunts or scavenger hunts.
+
+**Implementation:**
+```javascript
+function proceedAfterCorrectAnswer() {
+    const currentQuestion = quizData[currentQuestionIndex];
+
+    // Check for clue first (takes priority over images)
+    if (currentQuestion.clue) {
+        showClue(currentQuestion.clue);
+        return;
+    }
+
+    // Then check for image, then auto-proceed
+    // ...existing image/auto-proceed logic
+}
+```
+
+**Workflow:**
+1. User answers question correctly
+2. If `clue` field exists, display clue screen (golden border, prominent heading)
+3. User reads clue and clicks "Continue" button (or presses Enter)
+4. Quiz proceeds to next question
+
+**Priority Order:**
+- **Clue** (highest priority if present)
+- **Image** (if no clue)
+- **Auto-proceed** (if neither clue nor image)
+
+**Key Features:**
+- Works with all question types (text input, multiple choice, camera)
+- Keyboard support (Enter key to continue)
+- Clue takes priority over images if both are present
+- Golden-bordered box with "CLUE" heading for visual prominence
+
 ## Bug Patterns & Solutions
 
 ### 1. Message Display Persistence
@@ -183,12 +222,14 @@ function moveToNextQuestion() {
       "question": "Question text?",
       "answer": "correct answer",     // string or array
       "choices": ["A", "B", "C", "D"], // optional for multiple choice
-      "image": "path/to/image.png"     // optional
+      "image": "path/to/image.png",    // optional
+      "clue": "Look in the red box!"   // optional clue after correct answer
     },
     {
       "step": 2,
       "type": "camera",               // camera question type
-      "question": "Take a picture of something gold!"
+      "question": "Take a picture of something gold!",
+      "clue": "Search the kitchen cabinet for the next treasure!"
     }
   ]
 }
@@ -201,7 +242,9 @@ function moveToNextQuestion() {
 - `answer` can be string or array for multiple correct answers
 - `choices` presence determines text input vs multiple choice
 - `type: "camera"` creates photo capture question with self-validation
+- `clue` is optional; displays after correct answer, takes priority over images
 - `image` is optional; if missing or fails to load, auto-proceeds (text/multiple choice only)
+- **Priority order:** clue → image → auto-proceed
 
 ### Deck Manifest Format (decks/index.json)
 
@@ -342,4 +385,4 @@ This project was built with Claude (Anthropic). For questions about architectura
 ---
 
 *Last updated: January 3, 2026*
-*Session: Added camera question feature with self-validation split button*
+*Session: Added camera question feature with self-validation split button and clue system for scavenger hunts*
