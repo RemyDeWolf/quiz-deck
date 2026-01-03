@@ -278,6 +278,9 @@ function checkAnswer(selectedButton = null) {
             img.src = currentQuestion.image;
         } else {
             // No image, proceed to next question after a brief delay
+            // Hide any previous error messages
+            messageDisplay.classList.add('hidden');
+
             setTimeout(() => {
                 moveToNextQuestion();
             }, 1000);
