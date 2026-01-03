@@ -9,6 +9,7 @@ let totalQuestions = 0;
 let maxQuestions = null;
 let selectedChoice = null;
 let uploadedDeckData = null;
+let currentUserAnswer = '';
 
 // DOM elements
 const mainTitle = document.getElementById('main-title');
@@ -39,9 +40,13 @@ const validatePhotoBtn = document.getElementById('validate-photo-btn');
 const progressBar = document.getElementById('progress-bar');
 const scoreCard = document.getElementById('score-card');
 const scoreText = document.getElementById('score-text');
-const clueContainer = document.getElementById('clue-container');
-const clueText = document.getElementById('clue-text');
-const clueNextBtn = document.getElementById('clue-next-btn');
+const followUpContainer = document.getElementById('followup-container');
+const followUpQuestion = document.getElementById('followup-question');
+const followUpAnswer = document.getElementById('followup-answer');
+const followUpCorrectAnswerRow = document.getElementById('followup-correct-answer');
+const followUpCorrect = document.getElementById('followup-correct');
+const followUpMessage = document.getElementById('followup-message');
+const followUpNextBtn = document.getElementById('followup-next-btn');
 
 // Sound effects using Web Audio API
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -202,6 +207,10 @@ function displayCurrentQuestion() {
     }
 
     const currentQuestion = quizData[currentQuestionIndex];
+
+    // Show question display elements
+    stepNumber.style.display = 'block';
+    questionText.style.display = 'block';
     stepNumber.textContent = `Question ${currentQuestionIndex + 1}`;
     questionText.textContent = currentQuestion.question;
 
@@ -320,10 +329,13 @@ function checkAnswer(selectedButton = null) {
         playCorrectSound();
         score++;
 
+        // Store user's answer for hint screen
+        currentUserAnswer = userAnswer;
+
         questionContainer.style.display = 'none';
         multipleChoiceContainer.style.display = 'none';
 
-        // Proceed with clue/image/next question flow
+        // Proceed with follow-up/image/next question flow
         proceedAfterCorrectAnswer();
     } else {
         // Wrong answer - play error sound
@@ -342,17 +354,25 @@ function checkAnswer(selectedButton = null) {
                 answerInput.value = '';
                 answerInput.focus();
             } else {
-                // Can continue to next question
+                // Practice mode - show follow-up if available, then continue
+                currentUserAnswer = userAnswer;
                 questionContainer.style.display = 'none';
 
-                messageDisplay.textContent = 'WRONG ANSWER';
-                messageDisplay.classList.remove('hidden', 'success', 'final-success');
-                messageDisplay.classList.add('error');
+                // Check if there's a follow-up to display
+                if (currentQuestion.followUp) {
+                    // Show follow-up with correct answer
+                    showFollowUp(currentQuestion.followUp, false);
+                } else {
+                    // No follow-up, show error and proceed
+                    messageDisplay.textContent = 'WRONG ANSWER';
+                    messageDisplay.classList.remove('hidden', 'success', 'final-success');
+                    messageDisplay.classList.add('error');
 
-                setTimeout(() => {
-                    messageDisplay.classList.add('hidden');
-                    moveToNextQuestion();
-                }, 1500);
+                    setTimeout(() => {
+                        messageDisplay.classList.add('hidden');
+                        moveToNextQuestion();
+                    }, 1500);
+                }
             }
         }
     }
@@ -360,6 +380,7 @@ function checkAnswer(selectedButton = null) {
 
 // Show visual feedback for multiple choice questions
 function showMultipleChoiceFeedback(selectedButton, correctAnswer) {
+    const currentQuestion = quizData[currentQuestionIndex];
     const allButtons = document.querySelectorAll('.choice-btn');
 
     // Disable all buttons during feedback
@@ -398,34 +419,61 @@ function showMultipleChoiceFeedback(selectedButton, correctAnswer) {
             // Strict mode - reset and allow retry
             selectedChoice = null;
         } else {
-            // Practice mode - proceed to next question
-            moveToNextQuestion();
+            // Practice mode - check for follow-up or proceed to next question
+            if (currentQuestion.followUp) {
+                // Store the wrong answer before showing follow-up
+                currentUserAnswer = selectedChoice;
+                showFollowUp(currentQuestion.followUp, false);
+            } else {
+                moveToNextQuestion();
+            }
         }
     }, 2500);
 }
 
-// Show clue screen
-function showClue(clueTextContent) {
+// Show follow-up screen
+function showFollowUp(followUpText, wasCorrect = true) {
+    const currentQuestion = quizData[currentQuestionIndex];
+
+    // Hide all question UI elements
     questionContainer.style.display = 'none';
     multipleChoiceContainer.style.display = 'none';
     cameraContainer.style.display = 'none';
     messageDisplay.classList.add('hidden');
+    stepNumber.style.display = 'none';
+    questionText.style.display = 'none';
+    photoOverlay.classList.add('hidden');
 
-    clueText.textContent = clueTextContent;
-    clueContainer.classList.remove('hidden');
+    // Populate follow-up screen
+    followUpQuestion.textContent = currentQuestion.question;
+    followUpAnswer.textContent = currentUserAnswer;
+    followUpMessage.textContent = followUpText;
+
+    // Show correct answer if user was wrong
+    if (!wasCorrect) {
+        const correctAnswer = Array.isArray(currentQuestion.answer)
+            ? currentQuestion.answer[0]
+            : currentQuestion.answer;
+        followUpCorrect.textContent = correctAnswer;
+        followUpCorrectAnswerRow.classList.remove('hidden');
+    } else {
+        followUpCorrectAnswerRow.classList.add('hidden');
+    }
+
+    followUpContainer.classList.remove('hidden');
 }
 
-// Proceed after correct answer (check for clue, then image, then next question)
+// Proceed after correct answer (check for followUp, then image, then next question)
 function proceedAfterCorrectAnswer() {
     const currentQuestion = quizData[currentQuestionIndex];
 
-    // Check if there's a clue to display
-    if (currentQuestion.clue) {
-        showClue(currentQuestion.clue);
+    // Check if there's a follow-up to display
+    if (currentQuestion.followUp) {
+        showFollowUp(currentQuestion.followUp);
         return;
     }
 
-    // No clue, check if this is text input mode (not multiple choice)
+    // No follow-up, check if this is text input mode (not multiple choice)
     const isTextInput = !currentQuestion.choices || currentQuestion.choices.length === 0;
 
     // Check if there's an image to display
@@ -467,8 +515,11 @@ function moveToNextQuestion() {
     imageContainer.classList.add('hidden');
     messageDisplay.classList.add('hidden');
     cameraContainer.style.display = 'none';
-    clueContainer.classList.add('hidden');
+    followUpContainer.classList.add('hidden');
     validatePhotoBtn.style.display = 'block';
+    photoOverlay.classList.add('hidden'); // Hide photo overlay
+    currentUserAnswer = ''; // Reset user answer
+    selectedChoice = null; // Reset selected choice for multiple choice
     // Let displayCurrentQuestion() handle showing the right container type
     displayCurrentQuestion();
     updateProgressBar();
@@ -597,7 +648,7 @@ validatePhotoBtn.addEventListener('click', (e) => {
     const validationState = validatePhotoBtn.getAttribute('data-state');
 
     if (validationState === 'correct') {
-        // Post-validation: check for clue, then proceed
+        // Post-validation: check for follow-up, then proceed
         proceedAfterCorrectAnswer();
         return;
     } else if (validationState === 'incorrect') {
@@ -626,8 +677,13 @@ function handleCorrectPhoto() {
     playCorrectSound();
     score++;
 
+    // Store answer for hint screen
+    currentUserAnswer = 'Photo validated';
+
     // Apply success styling
     capturedPhoto.classList.add('correct');
+    photoOverlay.innerHTML = '✓<br><span style="font-size: 1.5rem;">Correct!</span>';
+    photoOverlay.classList.remove('hidden');
 
     // Change button to "Next Question" mode
     validatePhotoBtn.textContent = 'Next Question';
@@ -666,7 +722,7 @@ function retryPhotoCapture() {
 // Event listeners
 submitBtn.addEventListener('click', checkAnswer);
 nextBtn.addEventListener('click', moveToNextQuestion);
-clueNextBtn.addEventListener('click', moveToNextQuestion);
+followUpNextBtn.addEventListener('click', moveToNextQuestion);
 
 // Allow Enter key to submit answer
 answerInput.addEventListener('keypress', (e) => {
@@ -676,12 +732,12 @@ answerInput.addEventListener('keypress', (e) => {
     }
 });
 
-// Allow Enter key to proceed when viewing image or clue
+// Allow Enter key to proceed when viewing image or follow-up
 document.addEventListener('keypress', (e) => {
     if (e.key === 'Enter' && !imageContainer.classList.contains('hidden')) {
         moveToNextQuestion();
     }
-    if (e.key === 'Enter' && !clueContainer.classList.contains('hidden')) {
+    if (e.key === 'Enter' && !followUpContainer.classList.contains('hidden')) {
         moveToNextQuestion();
     }
 });

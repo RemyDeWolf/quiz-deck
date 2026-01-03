@@ -11,7 +11,7 @@ This document provides context for AI assistants working on the QuizDeck project
 - Two quiz modes: Strict (must answer correctly) and Practice (scoring)
 - Optional images and sound effects
 - Self-validated camera capture with secret split button
-- Clue system for scavenger hunt scenarios
+- Post-answer messages (follow-ups) for additional context
 
 ## Architecture Decisions
 
@@ -119,43 +119,62 @@ validatePhotoBtn.addEventListener('click', (e) => {
 - Button text changes: "Continue" → "Next Question" or "Try Again"
 - Button behavior changes based on state (navigation vs validation)
 
-### Clue System
-**Decision:** Display intermediate clues after correct answers for scavenger hunt scenarios.
+### Post-Answer Messages (Follow-Ups)
+**Decision:** Display intermediate messages after answering questions to provide additional context or guidance.
 
-**Use Case:** Guide participants to next locations in real-world treasure hunts or scavenger hunts.
+**Use Case:** Provide next steps, additional information, fun facts, or guidance after answering questions. Common uses include scavenger hunts, educational content, or step-by-step instructions. In Practice Mode, helps users learn from mistakes.
 
 **Implementation:**
 ```javascript
 function proceedAfterCorrectAnswer() {
     const currentQuestion = quizData[currentQuestionIndex];
 
-    // Check for clue first (takes priority over images)
-    if (currentQuestion.clue) {
-        showClue(currentQuestion.clue);
+    // Check for follow-up first (takes priority over images)
+    if (currentQuestion.followUp) {
+        showFollowUp(currentQuestion.followUp, true); // true = correct answer
         return;
     }
 
     // Then check for image, then auto-proceed
     // ...existing image/auto-proceed logic
 }
+
+// In practice mode wrong answer flow
+if (!requireCorrectAnswers && currentQuestion.followUp) {
+    showFollowUp(currentQuestion.followUp, false); // false = wrong answer
+}
 ```
 
-**Workflow:**
-1. User answers question correctly
-2. If `clue` field exists, display clue screen (golden border, prominent heading)
-3. User reads clue and clicks "Continue" button (or presses Enter)
-4. Quiz proceeds to next question
+**Workflow (Practice Mode):**
+1. User answers question (correctly or incorrectly)
+2. If wrong, shows "WRONG ANSWER" visual feedback (2.5s for multiple choice)
+3. If `followUp` field exists, display follow-up screen showing:
+   - Question text
+   - User's answer (correct or incorrect)
+   - Correct answer (only shown when user was wrong)
+   - Custom message (in larger italic yellow text for emphasis)
+4. User reads message and clicks "Continue" button (or presses Enter)
+5. Quiz proceeds to next question
+
+**Workflow (Strict Mode):**
+1. User must answer correctly to see follow-up
+2. Wrong answers show error and allow retry
+3. Once correct, follow-up displays (if present) without showing correct answer line
 
 **Priority Order:**
-- **Clue** (highest priority if present)
-- **Image** (if no clue)
-- **Auto-proceed** (if neither clue nor image)
+- **Follow-Up** (highest priority if present)
+- **Image** (if no follow-up)
+- **Auto-proceed** (if neither follow-up nor image)
 
 **Key Features:**
 - Works with all question types (text input, multiple choice, camera)
+- In Practice Mode: shown for both correct and wrong answers (educational)
+- In Strict Mode: shown only after correct answer
+- Displays correct answer when user was wrong (Practice Mode only)
 - Keyboard support (Enter key to continue)
-- Clue takes priority over images if both are present
-- Golden-bordered box with "CLUE" heading for visual prominence
+- Follow-up takes priority over images if both are present
+- Golden-bordered box with question, answer, and message
+- Message displayed in larger italic yellow text for visual emphasis
 
 ## Bug Patterns & Solutions
 
@@ -223,13 +242,13 @@ function moveToNextQuestion() {
       "answer": "correct answer",     // string or array
       "choices": ["A", "B", "C", "D"], // optional for multiple choice
       "image": "path/to/image.png",    // optional
-      "clue": "Look in the red box!"   // optional clue after correct answer
+      "followUp": "Look in the red box!"   // optional message after correct answer
     },
     {
       "step": 2,
       "type": "camera",               // camera question type
       "question": "Take a picture of something gold!",
-      "clue": "Search the kitchen cabinet for the next treasure!"
+      "followUp": "Search the kitchen cabinet for the next treasure!"
     }
   ]
 }
@@ -242,9 +261,12 @@ function moveToNextQuestion() {
 - `answer` can be string or array for multiple correct answers
 - `choices` presence determines text input vs multiple choice
 - `type: "camera"` creates photo capture question with self-validation
-- `clue` is optional; displays after correct answer, takes priority over images
+- `followUp` is optional; displays message after answering with question/answer context
+  - Practice Mode: shown for both correct and incorrect answers (shows correct answer when wrong)
+  - Strict Mode: shown only after correct answer
+  - Takes priority over images
 - `image` is optional; if missing or fails to load, auto-proceeds (text/multiple choice only)
-- **Priority order:** clue → image → auto-proceed
+- **Priority order:** followUp → image → auto-proceed
 
 ### Deck Manifest Format (decks/index.json)
 
@@ -385,4 +407,4 @@ This project was built with Claude (Anthropic). For questions about architectura
 ---
 
 *Last updated: January 3, 2026*
-*Session: Added camera question feature with self-validation split button and clue system for scavenger hunts*
+*Session: Added camera question feature with self-validation split button and post-answer follow-up messages system*

@@ -18,7 +18,7 @@ Upload your own question decks or use built-in quizzes with support for text inp
   - **Camera**: Take a photo and self-validate with secret split button
 - **Sound Effects**: Pleasant sounds for correct and wrong answers
 - Optional images that display after correct answers (automatically skips if image doesn't exist)
-- **Clue System**: Display intermediate clues after correct answers for scavenger hunt scenarios
+- **Post-Answer Messages**: Display follow-up messages after correct answers
 - **Two Quiz Modes**:
   - **Strict Mode** (`requireCorrectAnswers: true`): Must answer correctly to proceed
   - **Practice Mode** (`requireCorrectAnswers: false`): Continue after wrong answers and see final score
@@ -115,13 +115,13 @@ Each question deck file should follow this format:
       "step": 3,
       "question": "Text input with multiple correct answers?",
       "answer": ["answer1", "answer2"],
-      "clue": "Look inside the red box for the next item!"
+      "followUp": "Look inside the red box for the next item!"
     },
     {
       "step": 4,
       "type": "camera",
       "question": "Take a picture of something gold!",
-      "clue": "Search the kitchen cabinet for your next treasure!"
+      "followUp": "Search the kitchen cabinet for your next treasure!"
     }
   ]
 }
@@ -146,8 +146,8 @@ Each question deck file should follow this format:
   - A single string: `"sacramento"`
   - An array of strings for multiple correct answers (text input only): `["egg", "eggs"]`
 - **choices**: (Optional) Array of 4 strings for multiple choice questions. If present, displays buttons instead of text input
-- **clue**: (Optional) String - A clue to display after answering correctly. Perfect for scavenger hunts where you want to guide users to the next location or item. The clue appears in a golden-bordered box with a "Continue" button. Works with all question types
-- **image**: (Optional) The image file path to display when answered correctly (relative to project root). Omit this field if you don't want to show an image. Not used for camera questions. Note: If both `clue` and `image` are present, only the clue will be shown
+- **followUp**: (Optional) String - A message to display after answering correctly. Shows the deck name, question, user's answer, and your custom message in a golden-bordered box. Perfect for providing next steps, additional information, or guidance. Works with all question types
+- **image**: (Optional) The image file path to display when answered correctly (relative to project root). Omit this field if you don't want to show an image. Not used for camera questions. Note: If both `followUp` and `image` are present, only the follow-up message will be shown
 
 ### Adding Images
 
@@ -174,9 +174,9 @@ quiz-deck/
 
 ## Included Question Decks
 
-- **Pirate Treasure Hunt** (6 questions, strict mode): A pirate-themed adventure with text input and camera question
+- **Pirate Treasure Hunt** (6 questions, strict mode): A pirate-themed adventure with text input and camera question. Includes follow-up messages for scavenger hunt guidance
 - **Easter Egg Hunt** (5 questions, strict mode): An Easter-themed quiz with multiple answer support (text input)
-- **US State Capitals** (50 questions, random, max 10, practice mode): Multiple choice quiz with all 50 US state capitals. Questions are randomized and limited to 10 per session with scoring
+- **US State Capitals** (50 questions, random, max 10, practice mode): Multiple choice quiz with all 50 US state capitals. Questions are randomized and limited to 10 per session with scoring. Every capital includes an educational fun fact that displays whether you answer correctly or incorrectly!
 
 ## Examples
 
@@ -208,22 +208,29 @@ quiz-deck/
 - User takes a photo using device camera
 - Photo displays with a "Continue" button
 - **Secret split button validation** - only the person clicking knows:
-  - Click **right half** of button → Correct (green border, success sound, "Next Question" button appears)
-  - Click **left half** of button → Incorrect (red border, large red ✗ overlay, "Try Again" button appears)
+  - Click **right half** of button → Correct (green border, "✓ Correct!" overlay, success sound, "Next Question" button appears)
+  - Click **left half** of button → Incorrect (red border, large red "✗ Incorrect, try again" overlay, "Try Again" button appears)
 - On "Try Again", photo is hidden and user returns to camera input
-- On "Next Question", quiz proceeds to next question
+- On "Next Question", follow-up is checked (if present), then quiz proceeds
 - Observer watching wouldn't notice the split - button looks completely normal
 - Works in both Strict Mode (must get correct) and Practice Mode (scoring)
 
-### Clue System
-- Add a `clue` field to any question to display an intermediate screen after correct answer
-- Perfect for scavenger hunts to guide participants to the next location
-- Clue displays in a golden-bordered box with prominent "CLUE" heading
-- User reads the clue and clicks "Continue" (or presses Enter) to proceed
+### Post-Answer Messages (Follow-Ups)
+- Add a `followUp` field to any question to display an intermediate screen after answering
+- Perfect for providing next steps, additional information, fun facts, or guidance to participants
+- Displays in a golden-bordered box showing:
+  - The question that was asked
+  - The user's answer
+  - The correct answer (only shown when user answered incorrectly in Practice Mode)
+  - Your custom message (in larger italic yellow text for emphasis)
+- User reads the message and clicks "Continue" (or presses Enter) to proceed
+- **Behavior by Quiz Mode:**
+  - **Practice Mode** (`requireCorrectAnswers: false`): Follow-up shown for both correct AND incorrect answers, teaching users from their mistakes
+  - **Strict Mode** (`requireCorrectAnswers: true`): Follow-up shown only after correct answer (user must retry until correct)
 - Works with all question types: text input, multiple choice, and camera
-- If both `clue` and `image` are present, clue takes priority
-- Example workflow:
-  1. User answers "What is a Christmas tree?"
-  2. Correct answer triggers clue display: "Look carefully inside the Christmas tree branches to find a blue box"
-  3. User reads clue and clicks "Continue"
+- If both `followUp` and `image` are present, follow-up takes priority
+- Example workflow (Practice Mode):
+  1. User answers "What is the capital of Alaska?" → "Anchorage" (incorrect)
+  2. Follow-up screen displays showing the question, their wrong answer ("Anchorage"), correct answer ("Juneau"), and fun fact: "Juneau is the only U.S. state capital that cannot be reached by road - you can only get there by boat or plane!"
+  3. User learns from their mistake and clicks "Continue"
   4. Quiz proceeds to next question

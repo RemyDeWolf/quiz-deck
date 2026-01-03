@@ -13,13 +13,13 @@
       "step": 2,
       "question": "What flies on a pirate ship to show their identity?",
       "answer": "flag",
-      "clue": "Look for the black flag hanging near the window. Behind it you'll find the next clue!"
+      "followUp": "Look for the black flag hanging near the window. Behind it you'll find the next item!"
     },
     {
       "step": 3,
       "type": "camera",
       "question": "Take a picture of something gold (like treasure!)",
-      "clue": "Search inside the kitchen cabinet where the golden treasures are kept. The next item you seek is there!"
+      "followUp": "Search inside the kitchen cabinet where the golden treasures are kept. The next item you seek is there!"
     },
     {
       "step": 4,

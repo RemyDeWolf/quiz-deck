@@ -9,301 +9,351 @@
       "step": 1,
       "question": "What is the capital of Alabama?",
       "answer": "Montgomery",
-      "choices": ["Birmingham", "Montgomery", "Mobile", "Huntsville"]
+      "choices": ["Birmingham", "Montgomery", "Mobile", "Huntsville"],
+      "followUp": "Montgomery was the first capital of the Confederate States during the Civil War and is where Rosa Parks sparked the bus boycott!"
     },
     {
       "step": 2,
       "question": "What is the capital of Alaska?",
       "answer": "Juneau",
-      "choices": ["Anchorage", "Fairbanks", "Juneau", "Sitka"]
+      "choices": ["Anchorage", "Fairbanks", "Juneau", "Sitka"],
+      "followUp": "Juneau is the only U.S. state capital that cannot be reached by road - you can only get there by boat or plane!"
     },
     {
       "step": 3,
       "question": "What is the capital of Arizona?",
       "answer": "Phoenix",
-      "choices": ["Phoenix", "Tucson", "Mesa", "Scottsdale"]
+      "choices": ["Phoenix", "Tucson", "Mesa", "Scottsdale"],
+      "followUp": "Phoenix is one of the hottest major cities in the U.S., with temperatures exceeding 100°F for over 100 days per year!"
     },
     {
       "step": 4,
       "question": "What is the capital of Arkansas?",
       "answer": "Little Rock",
-      "choices": ["Little Rock", "Fort Smith", "Fayetteville", "Springdale"]
+      "choices": ["Little Rock", "Fort Smith", "Fayetteville", "Springdale"],
+      "followUp": "Little Rock gained national attention in 1957 when nine Black students integrated Central High School, a major Civil Rights moment!"
     },
     {
       "step": 5,
       "question": "What is the capital of California?",
       "answer": "Sacramento",
-      "choices": ["Los Angeles", "San Francisco", "Sacramento", "San Diego"]
+      "choices": ["Los Angeles", "San Francisco", "Sacramento", "San Diego"],
+      "followUp": "Sacramento was a major hub during the California Gold Rush and is nicknamed the 'City of Trees' with over 300,000 trees!"
     },
     {
       "step": 6,
       "question": "What is the capital of Colorado?",
       "answer": "Denver",
-      "choices": ["Denver", "Colorado Springs", "Aurora", "Boulder"]
+      "choices": ["Denver", "Colorado Springs", "Aurora", "Boulder"],
+      "followUp": "Denver is called the 'Mile High City' because it's exactly one mile (5,280 feet) above sea level!"
     },
     {
       "step": 7,
       "question": "What is the capital of Connecticut?",
       "answer": "Hartford",
-      "choices": ["Bridgeport", "New Haven", "Hartford", "Stamford"]
+      "choices": ["Bridgeport", "New Haven", "Hartford", "Stamford"],
+      "followUp": "Hartford is known as the 'Insurance Capital of the World' - it's home to dozens of major insurance companies!"
     },
     {
       "step": 8,
       "question": "What is the capital of Delaware?",
       "answer": "Dover",
-      "choices": ["Wilmington", "Dover", "Newark", "Middletown"]
+      "choices": ["Wilmington", "Dover", "Newark", "Middletown"],
+      "followUp": "Dover is home to Dover Air Force Base, which handles the largest volume of cargo traffic in the U.S. Air Force!"
     },
     {
       "step": 9,
       "question": "What is the capital of Florida?",
       "answer": "Tallahassee",
-      "choices": ["Miami", "Orlando", "Tampa", "Tallahassee"]
+      "choices": ["Miami", "Orlando", "Tampa", "Tallahassee"],
+      "followUp": "Tallahassee's name comes from a Native American word meaning 'old fields' or 'old town' in the Muskogee language!"
     },
     {
       "step": 10,
       "question": "What is the capital of Georgia?",
       "answer": "Atlanta",
-      "choices": ["Atlanta", "Savannah", "Augusta", "Columbus"]
+      "choices": ["Atlanta", "Savannah", "Augusta", "Columbus"],
+      "followUp": "Atlanta is the birthplace of Martin Luther King Jr. and was largely rebuilt after being burned during the Civil War!"
     },
     {
       "step": 11,
       "question": "What is the capital of Hawaii?",
       "answer": "Honolulu",
-      "choices": ["Honolulu", "Hilo", "Kailua", "Pearl City"]
+      "choices": ["Honolulu", "Hilo", "Kailua", "Pearl City"],
+      "followUp": "Honolulu is the most isolated major city in the world - it's over 2,000 miles from the nearest continental landmass!"
     },
     {
       "step": 12,
       "question": "What is the capital of Idaho?",
       "answer": "Boise",
-      "choices": ["Boise", "Meridian", "Nampa", "Idaho Falls"]
+      "choices": ["Boise", "Meridian", "Nampa", "Idaho Falls"],
+      "followUp": "Boise is one of the most tree-filled cities in the U.S. and sits in a high-desert valley at the edge of the Rocky Mountains!"
     },
     {
       "step": 13,
       "question": "What is the capital of Illinois?",
       "answer": "Springfield",
-      "choices": ["Chicago", "Springfield", "Naperville", "Peoria"]
+      "choices": ["Chicago", "Springfield", "Naperville", "Peoria"],
+      "followUp": "Springfield is where Abraham Lincoln lived for 24 years before becoming president, and his tomb and home are major historic sites!"
     },
     {
       "step": 14,
       "question": "What is the capital of Indiana?",
       "answer": "Indianapolis",
-      "choices": ["Indianapolis", "Fort Wayne", "Evansville", "South Bend"]
+      "choices": ["Indianapolis", "Fort Wayne", "Evansville", "South Bend"],
+      "followUp": "Indianapolis hosts the world-famous Indianapolis 500 race, the largest single-day sporting event in the world!"
     },
     {
       "step": 15,
       "question": "What is the capital of Iowa?",
       "answer": "Des Moines",
-      "choices": ["Des Moines", "Cedar Rapids", "Davenport", "Sioux City"]
+      "choices": ["Des Moines", "Cedar Rapids", "Davenport", "Sioux City"],
+      "followUp": "Des Moines means 'of the monks' in French and is known as a major insurance and financial services center!"
     },
     {
       "step": 16,
       "question": "What is the capital of Kansas?",
       "answer": "Topeka",
-      "choices": ["Wichita", "Overland Park", "Kansas City", "Topeka"]
+      "choices": ["Wichita", "Overland Park", "Kansas City", "Topeka"],
+      "followUp": "Topeka was at the center of the landmark Brown v. Board of Education case that ended school segregation in 1954!"
     },
     {
       "step": 17,
       "question": "What is the capital of Kentucky?",
       "answer": "Frankfort",
-      "choices": ["Louisville", "Lexington", "Frankfort", "Bowling Green"]
+      "choices": ["Louisville", "Lexington", "Frankfort", "Bowling Green"],
+      "followUp": "Frankfort is one of the smallest state capitals and is famous for bourbon distilleries and being home to the Buffalo Trace Distillery!"
     },
     {
       "step": 18,
       "question": "What is the capital of Louisiana?",
       "answer": "Baton Rouge",
-      "choices": ["New Orleans", "Baton Rouge", "Shreveport", "Lafayette"]
+      "choices": ["New Orleans", "Baton Rouge", "Shreveport", "Lafayette"],
+      "followUp": "Baton Rouge means 'red stick' in French, named after a red cypress pole that marked the boundary between tribal territories!"
     },
     {
       "step": 19,
       "question": "What is the capital of Maine?",
       "answer": "Augusta",
-      "choices": ["Portland", "Lewiston", "Bangor", "Augusta"]
+      "choices": ["Portland", "Lewiston", "Bangor", "Augusta"],
+      "followUp": "Augusta is the easternmost state capital in the U.S. and sits on the Kennebec River, historically important for shipping!"
     },
     {
       "step": 20,
       "question": "What is the capital of Maryland?",
       "answer": "Annapolis",
-      "choices": ["Baltimore", "Annapolis", "Frederick", "Rockville"]
+      "choices": ["Baltimore", "Annapolis", "Frederick", "Rockville"],
+      "followUp": "Annapolis is home to the U.S. Naval Academy and served as the temporary capital of the United States in 1783-1784!"
     },
     {
       "step": 21,
       "question": "What is the capital of Massachusetts?",
       "answer": "Boston",
-      "choices": ["Boston", "Worcester", "Springfield", "Cambridge"]
+      "choices": ["Boston", "Worcester", "Springfield", "Cambridge"],
+      "followUp": "Boston is home to the first public park in America (Boston Common, 1634) and the first subway system (1897)!"
     },
     {
       "step": 22,
       "question": "What is the capital of Michigan?",
       "answer": "Lansing",
-      "choices": ["Detroit", "Grand Rapids", "Lansing", "Ann Arbor"]
+      "choices": ["Detroit", "Grand Rapids", "Lansing", "Ann Arbor"],
+      "followUp": "Lansing is the only state capital that's not also a county seat, giving it a unique status among U.S. capitals!"
     },
     {
       "step": 23,
       "question": "What is the capital of Minnesota?",
       "answer": "Saint Paul",
-      "choices": ["Minneapolis", "Saint Paul", "Rochester", "Duluth"]
+      "choices": ["Minneapolis", "Saint Paul", "Rochester", "Duluth"],
+      "followUp": "Saint Paul is one of the 'Twin Cities' with Minneapolis and hosts the world's largest ice palace during the Winter Carnival!"
     },
     {
       "step": 24,
       "question": "What is the capital of Mississippi?",
       "answer": "Jackson",
-      "choices": ["Jackson", "Gulfport", "Southaven", "Hattiesburg"]
+      "choices": ["Jackson", "Gulfport", "Southaven", "Hattiesburg"],
+      "followUp": "Jackson is named after Andrew Jackson and is known as the 'City with Soul' for its rich blues and gospel music history!"
     },
     {
       "step": 25,
       "question": "What is the capital of Missouri?",
       "answer": "Jefferson City",
-      "choices": ["Kansas City", "St. Louis", "Springfield", "Jefferson City"]
+      "choices": ["Kansas City", "St. Louis", "Springfield", "Jefferson City"],
+      "followUp": "Jefferson City's Capitol Building has a dome that's higher than the U.S. Capitol in Washington D.C.!"
     },
     {
       "step": 26,
       "question": "What is the capital of Montana?",
       "answer": "Helena",
-      "choices": ["Billings", "Missoula", "Great Falls", "Helena"]
+      "choices": ["Billings", "Missoula", "Great Falls", "Helena"],
+      "followUp": "Helena started as a gold mining camp in 1864 and once had more millionaires per capita than any other city in the world!"
     },
     {
       "step": 27,
       "question": "What is the capital of Nebraska?",
       "answer": "Lincoln",
-      "choices": ["Omaha", "Lincoln", "Bellevue", "Grand Island"]
+      "choices": ["Omaha", "Lincoln", "Bellevue", "Grand Island"],
+      "followUp": "Lincoln is home to the Nebraska State Capitol, which has a unique tower design that makes it look more like a skyscraper than a traditional capitol!"
     },
     {
       "step": 28,
       "question": "What is the capital of Nevada?",
       "answer": "Carson City",
-      "choices": ["Las Vegas", "Reno", "Henderson", "Carson City"]
+      "choices": ["Las Vegas", "Reno", "Henderson", "Carson City"],
+      "followUp": "Carson City is one of only six independent cities in the U.S. - it's not part of any county and governs itself!"
     },
     {
       "step": 29,
       "question": "What is the capital of New Hampshire?",
       "answer": "Concord",
-      "choices": ["Manchester", "Nashua", "Concord", "Dover"]
+      "choices": ["Manchester", "Nashua", "Concord", "Dover"],
+      "followUp": "Concord is where the famous Concord Coach stagecoach was manufactured, revolutionizing transportation in the 1800s!"
     },
     {
       "step": 30,
       "question": "What is the capital of New Jersey?",
       "answer": "Trenton",
-      "choices": ["Newark", "Jersey City", "Paterson", "Trenton"]
+      "choices": ["Newark", "Jersey City", "Paterson", "Trenton"],
+      "followUp": "Trenton played a crucial role in the Revolutionary War - Washington crossed the Delaware River to attack Hessian forces there in 1776!"
     },
     {
       "step": 31,
       "question": "What is the capital of New Mexico?",
       "answer": "Santa Fe",
-      "choices": ["Albuquerque", "Las Cruces", "Santa Fe", "Rio Rancho"]
+      "choices": ["Albuquerque", "Las Cruces", "Santa Fe", "Rio Rancho"],
+      "followUp": "Santa Fe is the oldest state capital in the U.S., founded in 1610 - over 400 years ago!"
     },
     {
       "step": 32,
       "question": "What is the capital of New York?",
       "answer": "Albany",
-      "choices": ["New York City", "Buffalo", "Rochester", "Albany"]
+      "choices": ["New York City", "Buffalo", "Rochester", "Albany"],
+      "followUp": "Albany is one of the oldest continuously inhabited European settlements in the U.S., originally settled by the Dutch in 1614!"
     },
     {
       "step": 33,
       "question": "What is the capital of North Carolina?",
       "answer": "Raleigh",
-      "choices": ["Charlotte", "Raleigh", "Greensboro", "Durham"]
+      "choices": ["Charlotte", "Raleigh", "Greensboro", "Durham"],
+      "followUp": "Raleigh is part of the Research Triangle along with Durham and Chapel Hill, one of the largest research parks in the world!"
     },
     {
       "step": 34,
       "question": "What is the capital of North Dakota?",
       "answer": "Bismarck",
-      "choices": ["Fargo", "Bismarck", "Grand Forks", "Minot"]
+      "choices": ["Fargo", "Bismarck", "Grand Forks", "Minot"],
+      "followUp": "Bismarck is named after German Chancellor Otto von Bismarck to attract German investment for the Northern Pacific Railway!"
     },
     {
       "step": 35,
       "question": "What is the capital of Ohio?",
       "answer": "Columbus",
-      "choices": ["Cleveland", "Cincinnati", "Columbus", "Toledo"]
+      "choices": ["Cleveland", "Cincinnati", "Columbus", "Toledo"],
+      "followUp": "Columbus is the largest city in Ohio and is home to The Ohio State University, one of the largest universities in the nation!"
     },
     {
       "step": 36,
       "question": "What is the capital of Oklahoma?",
       "answer": "Oklahoma City",
-      "choices": ["Oklahoma City", "Tulsa", "Norman", "Broken Arrow"]
+      "choices": ["Oklahoma City", "Tulsa", "Norman", "Broken Arrow"],
+      "followUp": "Oklahoma City has working oil wells on the grounds of the state capitol building - you can see them pumping right there!"
     },
     {
       "step": 37,
       "question": "What is the capital of Oregon?",
       "answer": "Salem",
-      "choices": ["Portland", "Salem", "Eugene", "Gresham"]
+      "choices": ["Portland", "Salem", "Eugene", "Gresham"],
+      "followUp": "Salem is located in the heart of the Willamette Valley, one of the most fertile agricultural regions in the world!"
     },
     {
       "step": 38,
       "question": "What is the capital of Pennsylvania?",
       "answer": "Harrisburg",
-      "choices": ["Philadelphia", "Pittsburgh", "Allentown", "Harrisburg"]
+      "choices": ["Philadelphia", "Pittsburgh", "Allentown", "Harrisburg"],
+      "followUp": "Harrisburg sits on the Susquehanna River and is famous for its proximity to Three Mile Island, site of the 1979 nuclear accident!"
     },
     {
       "step": 39,
       "question": "What is the capital of Rhode Island?",
       "answer": "Providence",
-      "choices": ["Providence", "Warwick", "Cranston", "Pawtucket"]
+      "choices": ["Providence", "Warwick", "Cranston", "Pawtucket"],
+      "followUp": "Providence was founded by Roger Williams in 1636 as a haven for religious freedom and is one of America's oldest cities!"
     },
     {
       "step": 40,
       "question": "What is the capital of South Carolina?",
       "answer": "Columbia",
-      "choices": ["Charleston", "Columbia", "North Charleston", "Mount Pleasant"]
+      "choices": ["Charleston", "Columbia", "North Charleston", "Mount Pleasant"],
+      "followUp": "Columbia was one of the first planned cities in the U.S. and was largely burned by General Sherman during the Civil War!"
     },
     {
       "step": 41,
       "question": "What is the capital of South Dakota?",
       "answer": "Pierre",
-      "choices": ["Sioux Falls", "Rapid City", "Aberdeen", "Pierre"]
+      "choices": ["Sioux Falls", "Rapid City", "Aberdeen", "Pierre"],
+      "followUp": "Pierre (pronounced 'peer') is one of the least populous state capitals and sits right on the Missouri River!"
     },
     {
       "step": 42,
       "question": "What is the capital of Tennessee?",
       "answer": "Nashville",
-      "choices": ["Memphis", "Nashville", "Knoxville", "Chattanooga"]
+      "choices": ["Memphis", "Nashville", "Knoxville", "Chattanooga"],
+      "followUp": "Nashville is known as 'Music City' and is the home of country music, the Grand Ole Opry, and the Country Music Hall of Fame!"
     },
     {
       "step": 43,
       "question": "What is the capital of Texas?",
       "answer": "Austin",
-      "choices": ["Houston", "San Antonio", "Dallas", "Austin"]
+      "choices": ["Houston", "San Antonio", "Dallas", "Austin"],
+      "followUp": "Austin is known as the 'Live Music Capital of the World' and hosts the famous South by Southwest (SXSW) festival every year!"
     },
     {
       "step": 44,
       "question": "What is the capital of Utah?",
       "answer": "Salt Lake City",
-      "choices": ["Salt Lake City", "West Valley City", "Provo", "West Jordan"]
+      "choices": ["Salt Lake City", "West Valley City", "Provo", "West Jordan"],
+      "followUp": "Salt Lake City was founded by Brigham Young and the Mormon pioneers in 1847 and hosted the 2002 Winter Olympics!"
     },
     {
       "step": 45,
       "question": "What is the capital of Vermont?",
       "answer": "Montpelier",
-      "choices": ["Burlington", "Montpelier", "Rutland", "South Burlington"]
+      "choices": ["Burlington", "Montpelier", "Rutland", "South Burlington"],
+      "followUp": "Montpelier is the smallest state capital in the U.S. by population, with only about 8,000 residents!"
     },
     {
       "step": 46,
       "question": "What is the capital of Virginia?",
       "answer": "Richmond",
-      "choices": ["Virginia Beach", "Norfolk", "Richmond", "Arlington"]
+      "choices": ["Virginia Beach", "Norfolk", "Richmond", "Arlington"],
+      "followUp": "Richmond served as the capital of the Confederate States during the Civil War and is home to many important historical sites!"
     },
     {
       "step": 47,
       "question": "What is the capital of Washington?",
       "answer": "Olympia",
-      "choices": ["Seattle", "Spokane", "Tacoma", "Olympia"]
+      "choices": ["Seattle", "Spokane", "Tacoma", "Olympia"],
+      "followUp": "Olympia is named after the Olympic Mountains and is known for its thriving arts community and beautiful waterfront!"
     },
     {
       "step": 48,
       "question": "What is the capital of West Virginia?",
       "answer": "Charleston",
-      "choices": ["Charleston", "Huntington", "Morgantown", "Parkersburg"]
+      "choices": ["Charleston", "Huntington", "Morgantown", "Parkersburg"],
+      "followUp": "Charleston sits at the junction of the Elk and Kanawha Rivers and is the largest city in West Virginia!"
     },
     {
       "step": 49,
       "question": "What is the capital of Wisconsin?",
       "answer": "Madison",
-      "choices": ["Milwaukee", "Madison", "Green Bay", "Kenosha"]
+      "choices": ["Milwaukee", "Madison", "Green Bay", "Kenosha"],
+      "followUp": "Madison is built on an isthmus between two lakes and is home to the University of Wisconsin, one of the top public universities!"
     },
     {
       "step": 50,
       "question": "What is the capital of Wyoming?",
       "answer": "Cheyenne",
-      "choices": ["Cheyenne", "Casper", "Laramie", "Gillette"]
+      "choices": ["Cheyenne", "Casper", "Laramie", "Gillette"],
+      "followUp": "Cheyenne hosts the world's largest outdoor rodeo event, Cheyenne Frontier Days, which has been running since 1897!"
     }
   ]
 }

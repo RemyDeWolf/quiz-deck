@@ -51,7 +51,7 @@
             <div id="camera-container" class="hidden">
                 <input type="file" id="camera-input" accept="image/*" capture="environment" />
                 <div id="photo-preview" class="hidden">
-                    <img id="captured-photo" src="" alt="Your Photo">
+                    <img id="captured-photo" src="" alt="">
                     <div id="photo-overlay" class="hidden"></div>
                     <button id="validate-photo-btn">Continue</button>
                 </div>
@@ -64,12 +64,18 @@
                 <button id="next-btn">Next Question</button>
             </div>
 
-            <div id="clue-container" class="hidden">
-                <div id="clue-content">
-                    <h3>Clue</h3>
-                    <p id="clue-text"></p>
+            <div id="followup-container" class="hidden">
+                <div id="followup-content">
+                    <div id="followup-details">
+                        <p><strong>Question:</strong> <span id="followup-question"></span></p>
+                        <p><strong>Your Answer:</strong> <span id="followup-answer"></span></p>
+                        <p id="followup-correct-answer" class="hidden"><strong>Correct Answer:</strong> <span id="followup-correct"></span></p>
+                    </div>
+                    <div id="followup-message-box">
+                        <p id="followup-message"></p>
+                    </div>
                 </div>
-                <button id="clue-next-btn">Continue</button>
+                <button id="followup-next-btn">Continue</button>
             </div>
 
             <div id="score-card" class="hidden">

@@ -228,6 +228,11 @@ h2 {
     border: 5px solid transparent;
 }
 
+#captured-photo:not([src]),
+#captured-photo[src=""] {
+    display: none;
+}
+
 #captured-photo.correct {
     border-color: #4caf50;
     box-shadow: 0 0 30px rgba(76, 175, 80, 0.8);
@@ -245,7 +250,6 @@ h2 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(211, 47, 47, 0.9);
     color: white;
     padding: 20px 40px;
     font-size: 5rem;
@@ -254,6 +258,14 @@ h2 {
     pointer-events: none;
     text-align: center;
     line-height: 1.2;
+}
+
+#captured-photo.incorrect ~ #photo-overlay {
+    background-color: rgba(211, 47, 47, 0.9);
+}
+
+#captured-photo.correct ~ #photo-overlay {
+    background-color: rgba(76, 175, 80, 0.9);
 }
 
 #validate-photo-btn {
@@ -420,12 +432,12 @@ button:active {
     margin-bottom: 1rem;
 }
 
-#clue-container {
+#followup-container {
     text-align: center;
     margin-top: 2rem;
 }
 
-#clue-content {
+#followup-content {
     background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
     border: 3px solid #ffd700;
     border-radius: 12px;
@@ -434,19 +446,40 @@ button:active {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
 
-#clue-content h3 {
-    color: #ffd700;
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+#followup-details {
+    text-align: left;
+    margin-bottom: 2rem;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
 }
 
-#clue-text {
+#followup-details p {
     font-size: 1.5rem;
-    line-height: 1.8;
+    line-height: 1.6;
     color: #e0e0e0;
-    text-align: left;
+    margin-bottom: 1rem;
+}
+
+#followup-details strong {
+    color: #ffd700;
+}
+
+#followup-message-box {
+    padding: 30px 40px;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.05));
+    border: 3px solid #ffd700;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+#followup-message {
+    font-size: 2rem;
+    line-height: 1.8;
+    color: #ffed4e;
+    text-align: center;
+    font-style: italic;
+    font-weight: 500;
 }
 
 .hidden {
